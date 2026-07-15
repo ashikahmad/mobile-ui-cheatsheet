@@ -421,6 +421,11 @@
   .m-progress{ width:100%; height:5px; border-radius:3px; background:#E4E4E8; overflow:hidden; }
   .m-progress-fill{ height:100%; border-radius:3px; width:62%; }
 
+  /* iOS activity indicator: radiating tick wheel, not a ring */
+  .m-activity{ position:relative; width:26px; height:26px; margin:0 auto; animation:m-spin-steps 0.8s steps(8) infinite; }
+  .m-activity .m-tick{ position:absolute; top:0; left:50%; width:2px; height:7px; margin-left:-1px; background:#8E8E93; border-radius:1px; transform-origin:1px 13px; }
+  @keyframes m-spin-steps{ to{ transform:rotate(360deg); } }
+
   /* badge */
   .m-badge-wrap{ position:relative; width:34px; height:34px; }
   .m-badge-icon{ width:34px; height:34px; border-radius:50%; background:#E4E4E8; display:flex; align-items:center; justify-content:center; font-size:15px; color:#8E8E93; }
@@ -724,7 +729,7 @@ const DATA = [
     ios:{term:"Custom banner", fw:"no direct system component", none:true},
     android:{term:"Snackbar", fw:"Snackbar.make()"},
     desc:"Similar to a toast but can include a single action (e.g. \"Undo\"), typically anchored to the bottom of the screen."},
-  {cat:"Feedback & Status", concept:"Indeterminate loading spinner", demo:"spinner",
+  {cat:"Feedback & Status", concept:"Indeterminate loading spinner", demo:"activityindicator",
     ios:{term:"Activity Indicator", fw:"UIActivityIndicatorView · ProgressView()"},
     android:{term:"Circular Progress Indicator", fw:"ProgressBar (circular) · CircularProgressIndicator"},
     desc:"A spinning indicator shown while work of unknown duration happens in the background."},
@@ -988,6 +993,16 @@ const MOCKS = {
   spinner(p){
     const cls = p==='ios' ? 'm-spinner-ios' : 'm-spinner-android';
     return `<div class="m-spinner ${cls}"></div>`;
+  },
+  activityindicator(p){
+    if(p==='ios'){
+      const ticks = Array.from({length:8}, (_, i) => {
+        const opacity = (1 - i*0.11).toFixed(2);
+        return `<div class="m-tick" style="transform:rotate(${i*45}deg);opacity:${opacity};"></div>`;
+      }).join('');
+      return `<div class="m-activity">${ticks}</div>`;
+    }
+    return `<div class="m-spinner m-spinner-android"></div>`;
   },
   progress(p){
     const color = p==='ios' ? 'var(--ios)' : 'var(--android)';
