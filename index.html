@@ -620,7 +620,7 @@ const DATA = [
     ios:{term:"Ellipsis Button / Menu", fw:"UIMenu on a UIButton"},
     android:{term:"Overflow Menu", fw:"three-dot icon → PopupMenu / DropdownMenu"},
     desc:"A button (··· on iOS, ⋮ on Android) that reveals secondary actions that don't fit in the main bar."},
-  {cat:"Buttons & Actions", concept:"Long-press contextual menu", demo:"overflow",
+  {cat:"Buttons & Actions", concept:"Long-press contextual menu", demo:"contextmenu",
     ios:{term:"Context Menu", fw:"UIContextMenuInteraction · contextMenu()"},
     android:{term:"Context Menu", fw:"registerForContextMenu · long-press + DropdownMenu"},
     desc:"A menu of actions relevant to a specific item, triggered by a long press (iOS often pairs it with a preview/peek)."},
@@ -634,7 +634,7 @@ const DATA = [
     ios:{term:"Text Field", fw:"UITextField · TextField"},
     android:{term:"Edit Text", fw:"EditText · TextField (Material)"},
     desc:"The base control for typed text entry. Android's Material version bundles a floating label by default."},
-  {cat:"Input & Selection", concept:"Multi-line text input", demo:"textfield",
+  {cat:"Input & Selection", concept:"Multi-line text input", demo:"textarea",
     ios:{term:"Text View", fw:"UITextView · TextEditor"},
     android:{term:"Multiline Edit Text", fw:"EditText(inputType=multiline)"},
     desc:"A scrollable text field for paragraphs — comments, notes, descriptions."},
@@ -654,7 +654,7 @@ const DATA = [
     ios:{term:"Picker", fw:"UIPickerView · Picker(.wheel)"},
     android:{term:"Spinner / Dropdown Menu", fw:"Spinner · ExposedDropdownMenu"},
     desc:"Choosing one value from a set. iOS favors a spinning wheel; Android favors a dropdown/menu-style selector."},
-  {cat:"Input & Selection", concept:"Date / time selection", demo:"textfield",
+  {cat:"Input & Selection", concept:"Date / time selection", demo:"datepicker",
     ios:{term:"Date Picker", fw:"UIDatePicker · DatePicker"},
     android:{term:"Date Picker / Time Picker", fw:"MaterialDatePicker · DatePicker (Compose)"},
     desc:"Both platforms provide a dedicated, system-styled date/time selection surface, usually shown in a sheet or dialog."},
@@ -832,12 +832,30 @@ const MOCKS = {
     return `<div><div class="m-menu-anchor">⋮</div><div class="m-menu">
       <div class="m-dropdown-item">Rename</div><div class="m-dropdown-item">Duplicate</div><div class="m-dropdown-item">Delete</div></div></div>`;
   },
+  contextmenu(p){
+    return `<div><div class="m-menu-anchor" style="text-align:center;font-size:10.5px;color:#8E8E93;">☝︎ long-press item</div><div class="m-menu">
+      <div class="m-dropdown-item">Rename</div><div class="m-dropdown-item">Duplicate</div><div class="m-dropdown-item">Delete</div></div></div>`;
+  },
   swipe(p){
     return `<div class="m-swipe"><div class="m-swipe-content">Grocery list</div><div class="m-swipe-action">Delete</div></div>`;
   },
   textfield(p){
     if(p==='ios') return `<div class="m-field-ios">Email address</div>`;
     return `<div class="m-field-android"><span class="m-label">Email</span>you@example.com</div>`;
+  },
+  textarea(p){
+    if(p==='ios') return `<div class="m-field-ios" style="min-height:52px;">Add a comment…</div>`;
+    return `<div class="m-field-android" style="min-height:52px;"><span class="m-label">Comment</span>Add a comment…</div>`;
+  },
+  datepicker(p){
+    if(p==='ios') return `<div class="m-wheel">
+      <div class="m-wheel-row">Jul 14</div>
+      <div class="m-wheel-row mid">Jul 15</div>
+      <div class="m-wheel-row">Jul 16</div>
+    </div>`;
+    return `<div class="m-dropdown">
+      <div class="m-dropdown-head"><span>📅 Jul 16, 2026</span><span>▾</span></div>
+    </div>`;
   },
   switch(p){
     if(p==='ios') return `<div class="m-switch-row"><span>Notifications</span><div class="m-switch m-switch-ios"><div class="m-knob"></div></div></div>`;
