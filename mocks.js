@@ -1,24 +1,33 @@
+function deviceShell(innerHtml, position){
+  return `<div class="m-shell"><div class="m-shell-content ${position}">${innerHtml}</div></div>`;
+}
+
 const MOCKS = {
   navbar(p){
-    if(p==='ios') return `<div class="m-navbar m-navbar-ios"><span class="m-back">‹ Back</span><span class="m-title">Title</span><span class="m-action">Edit</span></div>`;
-    return `<div class="m-navbar m-navbar-android"><span>←</span><span class="m-title">Title</span><span class="m-icons">⋮</span></div>`;
+    const inner = p==='ios'
+      ? `<div class="m-navbar m-navbar-ios"><span class="m-back">‹ Back</span><span class="m-title">Title</span><span class="m-action">Edit</span></div>`
+      : `<div class="m-navbar m-navbar-android"><span>←</span><span class="m-title">Title</span><span class="m-icons">⋮</span></div>`;
+    return deviceShell(inner, 'top');
   },
   tabbar(p){
-    if(p==='ios') return `<div class="m-tabbar m-tabbar-ios">
-      <div class="m-tab"><span>◻</span>Home</div>
-      <div class="m-tab active"><span>◉</span>Search</div>
-      <div class="m-tab"><span>☰</span>Profile</div></div>`;
-    return `<div class="m-tabbar m-tabbar-android">
-      <div class="m-tab"><span class="m-tabicon">◻</span>Home</div>
-      <div class="m-tab active"><span class="m-tabicon">◉</span>Search</div>
-      <div class="m-tab"><span class="m-tabicon">☰</span>Profile</div></div>`;
+    const inner = p==='ios'
+      ? `<div class="m-tabbar m-tabbar-ios">
+        <div class="m-tab"><span>◻</span>Home</div>
+        <div class="m-tab active"><span>◉</span>Search</div>
+        <div class="m-tab"><span>☰</span>Profile</div></div>`
+      : `<div class="m-tabbar m-tabbar-android">
+        <div class="m-tab"><span class="m-tabicon">◻</span>Home</div>
+        <div class="m-tab active"><span class="m-tabicon">◉</span>Search</div>
+        <div class="m-tab"><span class="m-tabicon">☰</span>Profile</div></div>`;
+    return deviceShell(inner, 'bottom');
   },
   drawer(p){
-    return `<div class="m-drawer"><div class="m-drawer-panel">
-      <div class="m-listrow"><span>Inbox</span></div>
-      <div class="m-listrow"><span>Starred</span></div>
-      <div class="m-listrow"><span>Sent</span></div>
-    </div><div class="m-drawer-scrim"></div></div>`;
+    const inner = `<div class="m-drawer"><div class="m-drawer-panel">
+        <div class="m-listrow"><span>Inbox</span></div>
+        <div class="m-listrow"><span>Starred</span></div>
+        <div class="m-listrow"><span>Sent</span></div>
+      </div><div class="m-drawer-scrim"></div></div>`;
+    return deviceShell(inner, 'cover');
   },
   backrow(p){
     if(p==='ios') return `<div style="text-align:center;font-size:12px;"><span style="color:var(--ios);font-weight:600;">‹ Back</span><div style="color:#8E8E93;font-size:10px;margin-top:6px;">+ edge-swipe gesture</div></div>`;
@@ -157,24 +166,27 @@ const MOCKS = {
     </div>`;
   },
   actionsheet(p){
-    if(p==='ios') return `<div class="m-sheet">
-      <div class="m-listrow danger">Delete Conversation</div>
-      <div class="m-listrow">Forward</div>
-      <div class="m-cancel">Cancel</div>
-    </div>`;
-    return `<div class="m-sheet">
-      <div class="m-sheet-handle"></div>
-      <div class="m-listrow">🗑 Delete Conversation</div>
-      <div class="m-listrow">↪ Forward</div>
-    </div>`;
+    const inner = p==='ios'
+      ? `<div class="m-sheet">
+        <div class="m-listrow danger">Delete Conversation</div>
+        <div class="m-listrow">Forward</div>
+        <div class="m-cancel">Cancel</div>
+      </div>`
+      : `<div class="m-sheet">
+        <div class="m-sheet-handle"></div>
+        <div class="m-listrow">🗑 Delete Conversation</div>
+        <div class="m-listrow">↪ Forward</div>
+      </div>`;
+    return deviceShell(inner, 'bottom');
   },
   sheet(p){
-    return `<div class="m-sheet">
-      <div class="m-sheet-handle"></div>
-      <div class="m-card-line" style="width:40%;height:9px;margin-bottom:10px;"></div>
-      <div class="m-card-line"></div>
-      <div class="m-card-line"></div>
-    </div>`;
+    const inner = `<div class="m-sheet">
+        <div class="m-sheet-handle"></div>
+        <div class="m-card-line" style="width:40%;height:9px;margin-bottom:10px;"></div>
+        <div class="m-card-line"></div>
+        <div class="m-card-line"></div>
+      </div>`;
+    return deviceShell(inner, 'bottom');
   },
   popover(p){
     if(p==='ios') return `<div class="m-popover m-popover-ios">
@@ -183,16 +195,17 @@ const MOCKS = {
       <div class="m-listrow">Share</div><div class="m-listrow">Copy Link</div></div>`;
   },
   fullscreen(p){
-    return `<div class="m-fullscreen">
-      <div class="m-fs-head"><span>New Message</span><span class="m-fs-close">✕</span></div>
-      <div class="m-card-line"></div><div class="m-card-line"></div>
-    </div>`;
+    const inner = `<div class="m-fullscreen">
+        <div class="m-fs-head"><span>New Message</span><span class="m-fs-close">✕</span></div>
+        <div class="m-card-line"></div><div class="m-card-line"></div>
+      </div>`;
+    return deviceShell(inner, 'cover');
   },
   toast(p){
-    return `<div class="m-toast">Saved to Downloads</div>`;
+    return deviceShell(`<div class="m-toast">Saved to Downloads</div>`, 'floating-bottom');
   },
   snackbar(p){
-    return `<div class="m-snackbar"><span>Message archived</span><span class="action">UNDO</span></div>`;
+    return deviceShell(`<div class="m-snackbar"><span>Message archived</span><span class="action">UNDO</span></div>`, 'floating-bottom');
   },
   spinner(p){
     const cls = p==='ios' ? 'm-spinner-ios' : 'm-spinner-android';
@@ -234,16 +247,20 @@ const MOCKS = {
     </div>`;
   },
   statusbar(p){
-    if(p==='ios') return `<div class="m-statusbar m-statusbar-ios"><span>9:41</span><span class="m-si">••• 🛜 🔋</span></div>`;
-    return `<div class="m-statusbar m-statusbar-android"><span>9:41</span><span class="m-si">🔔 🛜 🔋</span></div>`;
+    const inner = p==='ios'
+      ? `<div class="m-statusbar m-statusbar-ios"><span>9:41</span><span class="m-si">••• 🛜 🔋</span></div>`
+      : `<div class="m-statusbar m-statusbar-android"><span>9:41</span><span class="m-si">🔔 🛜 🔋</span></div>`;
+    return deviceShell(inner, 'top');
   },
   safearea(p){
-    if(p==='ios') return `<div class="m-device"><div class="m-notch"></div><div class="m-safe-inset ios">Safe Area</div></div>`;
-    return `<div class="m-device"><div class="m-punch"></div><div class="m-safe-inset android">Content area</div></div>`;
+    if(p==='ios') return `<div class="m-shell"><div class="m-notch"></div><div class="m-safe-inset ios">Safe Area</div></div>`;
+    return `<div class="m-shell"><div class="m-punch"></div><div class="m-safe-inset android">Content area</div></div>`;
   },
   homeindicator(p){
-    if(p==='ios') return `<div class="m-bottomstrip"><div class="m-home-pill"></div><div class="m-bottomstrip-caption">Home Indicator</div></div>`;
-    return `<div class="m-bottomstrip"><div class="m-home-pill" style="background:#5B5E64;"></div><div class="m-bottomstrip-caption">Gesture pill (or 3-button nav)</div></div>`;
+    const inner = p==='ios'
+      ? `<div class="m-bottomstrip"><div class="m-home-pill"></div><div class="m-bottomstrip-caption">Home Indicator</div></div>`
+      : `<div class="m-bottomstrip"><div class="m-home-pill" style="background:#5B5E64;"></div><div class="m-bottomstrip-caption">Gesture pill (or 3-button nav)</div></div>`;
+    return deviceShell(inner, 'bottom');
   },
   stack(p){
     const cls = p==='ios' ? 'ios' : 'android';
