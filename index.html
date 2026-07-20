@@ -129,6 +129,19 @@
     margin-left:auto;
     padding-left:8px;
   }
+  .filter-toggle{ display:none; }
+  @media(max-width:759px){
+    .filter-toggle{ display:inline-flex; align-items:center; gap:4px; }
+    .chips{
+      display:none;
+      flex-basis:100%;
+      order:5;
+      padding-top:10px;
+      margin-top:2px;
+      border-top:1px dashed var(--line);
+    }
+    .chips.open{ display:flex; }
+  }
 
   /* ---------- MAIN ---------- */
   main{max-width:1080px;margin:0 auto;padding:36px 24px 100px;}
@@ -150,19 +163,6 @@
     font-size:12px;color:var(--ink-soft);
   }
 
-  .grid-head{
-    display:none;
-    grid-template-columns: 1.4fr 1.7fr 1.7fr 2.2fr;
-    gap:0;
-    padding:0 18px 8px;
-    font-family:"Roboto Mono",monospace;
-    font-size:11px;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
-  }
-  @media(min-width:760px){ .grid-head{display:grid;} }
-
   .entry{
     background:var(--card);
     border:1px solid var(--line);
@@ -171,19 +171,23 @@
     margin-bottom:10px;
   }
   .entry-row{
-    display:grid;
-    grid-template-columns: 1fr;
-    gap:10px 18px;
-  }
-  @media(min-width:760px){
-    .entry-row{grid-template-columns: 1.4fr 1.7fr 1.7fr 2.2fr;align-items:start;}
+    display:flex;
+    flex-direction:column;
+    gap:10px;
   }
   .entry:hover{border-color:#CFCBBD;}
 
   .concept{font-weight:700;font-size:15px;}
   .concept .also{display:block;font-weight:400;font-size:12px;color:var(--ink-soft);margin-top:2px;}
 
-  .platform-cell{font-size:13.5px;line-height:1.5;}
+  .platform-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 24px;
+    padding-top:8px;
+    border-top:1px dashed var(--line);
+  }
+  .platform-cell{flex:1 1 200px;font-size:13.5px;line-height:1.5;}
   .platform-cell .label-mobile{
     display:inline-block;
     font-family:"Roboto Mono",monospace;
@@ -193,7 +197,6 @@
     color:var(--ink-soft);
     margin-bottom:3px;
   }
-  @media(min-width:760px){ .platform-cell .label-mobile{display:none;} }
   .term{font-weight:600;}
   .term.ios{color:var(--ios);}
   .term.android{color:var(--android);}
@@ -573,6 +576,7 @@
   <div class="controls-inner">
     <input id="search" type="text" placeholder="Search a concept, or a term like &quot;snackbar&quot;, &quot;UITableView&quot;, &quot;drawer&quot;…" autocomplete="off">
     <button id="toggleExamples" class="chip toggle-examples">Hide all examples</button>
+    <button id="filterToggle" class="chip filter-toggle" aria-expanded="false" aria-controls="chips">Filter: All ▾</button>
     <div class="chips" id="chips"></div>
     <span class="result-count" id="resultCount"></span>
   </div>
@@ -1178,9 +1182,6 @@ function render(filterText, activeCat){
         <h2>${cat}</h2>
         <span class="count">${items.length} item${items.length>1?'s':''}</span>
       </div>
-      <div class="grid-head">
-        <span>Concept</span><span>iOS</span><span>Android</span><span>What it is</span>
-      </div>
     `;
 
     items.forEach(d => {
@@ -1189,9 +1190,11 @@ function render(filterText, activeCat){
       entry.innerHTML = `
         <div class="entry-row">
           <div class="concept">${d.concept}</div>
-          ${platformCell(d, 'ios', 'iOS')}
-          ${platformCell(d, 'android', 'Android')}
           <div class="desc">${d.desc}</div>
+          <div class="platform-row">
+            ${platformCell(d, 'ios', 'iOS')}
+            ${platformCell(d, 'android', 'Android')}
+          </div>
         </div>
         ${renderPreview(d, examplesOpen)}
       `;
@@ -1218,6 +1221,20 @@ toggleBtn.addEventListener('click', () => {
 });
 
 const chipsEl = document.getElementById('chips');
+const filterToggleBtn = document.getElementById('filterToggle');
+const isMobile = () => window.matchMedia('(max-width:759px)').matches;
+
+function setFilterLabel(cat){
+  const arrow = chipsEl.classList.contains('open') ? '▴' : '▾';
+  filterToggleBtn.textContent = `Filter: ${cat} ${arrow}`;
+}
+
+filterToggleBtn.addEventListener('click', () => {
+  const isOpen = chipsEl.classList.toggle('open');
+  filterToggleBtn.setAttribute('aria-expanded', String(isOpen));
+  setFilterLabel(activeCat);
+});
+
 let activeCat = 'All';
 ['All', ...CATEGORY_ORDER].forEach(cat => {
   const chip = document.createElement('button');
@@ -1226,10 +1243,18 @@ let activeCat = 'All';
   chip.addEventListener('click', () => {
     activeCat = cat;
     [...chipsEl.children].forEach(c => c.classList.toggle('active', c===chip));
+    setFilterLabel(activeCat);
+    if(isMobile()){
+      chipsEl.classList.remove('open');
+      filterToggleBtn.setAttribute('aria-expanded', 'false');
+      setFilterLabel(activeCat);
+    }
     render(searchEl.value, activeCat);
   });
   chipsEl.appendChild(chip);
 });
+
+setFilterLabel(activeCat);
 
 const searchEl = document.getElementById('search');
 searchEl.addEventListener('input', () => render(searchEl.value, activeCat));
