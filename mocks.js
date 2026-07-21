@@ -1,5 +1,14 @@
 function deviceShell(innerHtml, position){
-  return `<div class="m-shell"><div class="m-shell-content ${position}">${innerHtml}</div></div>`;
+  if(position === 'top'){
+    return `<div class="m-shell crop-top"><div class="m-shell-notch"></div><div class="m-shell-content">${innerHtml}</div></div>`;
+  }
+  if(position === 'bottom'){
+    return `<div class="m-shell crop-bottom"><div class="m-shell-content">${innerHtml}</div><div class="m-shell-home-pill"></div></div>`;
+  }
+  if(position === 'floating-bottom'){
+    return `<div class="m-shell crop-bottom floating"><div class="m-shell-content">${innerHtml}</div><div class="m-shell-home-pill"></div></div>`;
+  }
+  return `<div class="m-shell full"><div class="m-shell-content">${innerHtml}</div></div>`;
 }
 
 const MOCKS = {
@@ -253,8 +262,8 @@ const MOCKS = {
     return deviceShell(inner, 'top');
   },
   safearea(p){
-    if(p==='ios') return `<div class="m-shell"><div class="m-notch"></div><div class="m-safe-inset ios">Safe Area</div></div>`;
-    return `<div class="m-shell"><div class="m-punch"></div><div class="m-safe-inset android">Content area</div></div>`;
+    if(p==='ios') return `<div class="m-shell full"><div class="m-notch"></div><div class="m-safe-inset ios">Safe Area</div></div>`;
+    return `<div class="m-shell full"><div class="m-punch"></div><div class="m-safe-inset android">Content area</div></div>`;
   },
   homeindicator(p){
     const inner = p==='ios'

@@ -16,28 +16,19 @@ function platformCell(entry, key, mobileLabel){
   } else {
     inner = `<span class="term ${key}">${p.term}</span><span class="fw">${p.fw}</span>`;
   }
-  return `<div class="platform-cell"><span class="label-mobile">${mobileLabel}</span>${inner}</div>`;
+  const preview = entry.demo ? renderCellPreview(entry, key) : '';
+  return `<div class="platform-cell"><span class="label-mobile">${mobileLabel}</span>${inner}${preview}</div>`;
 }
 
-function renderPreview(entry, open){
-  if(!entry.demo) return '';
-  const iosInner = entry.ios.none
-    ? `<div class="m-unsupported"><div class="m-unsupported-icon">–</div><div class="m-unsupported-text">${entry.ios.term}</div></div>`
-    : `<div class="m-body">${MOCKS[entry.demo]('ios')}</div>`;
-  const androidInner = entry.android.none
-    ? `<div class="m-unsupported"><div class="m-unsupported-icon">–</div><div class="m-unsupported-text">${entry.android.term}</div></div>`
-    : `<div class="m-body">${MOCKS[entry.demo]('android')}</div>`;
-  return `
-    <details class="preview"${open ? ' open' : ''}>
-      <summary>Example</summary>
-      <div class="preview-row">
-        <div class="m-frame m-frame-ios"><span class="m-frame-tag"><span class="dot ios"></span>iOS</span>${iosInner}</div>
-        <div class="m-frame m-frame-android"><span class="m-frame-tag"><span class="dot android"></span>Android</span>${androidInner}</div>
-      </div>
-    </details>`;
+function renderCellPreview(entry, key){
+  const p = entry[key];
+  const label = key === 'ios' ? 'iOS' : 'Android';
+  const inner = p.none
+    ? `<div class="m-unsupported"><div class="m-unsupported-icon">–</div><div class="m-unsupported-text">${p.term}</div></div>`
+    : `<div class="m-body">${MOCKS[entry.demo](key)}</div>`;
+  return `<div class="m-frame m-frame-${key}"><span class="m-frame-tag"><span class="dot ${key}"></span>${label}</span>${inner}</div>`;
 }
 
-let examplesOpen = true;
 let scrollObserver = null;
 const isMobile = () => window.matchMedia('(max-width:899px)').matches;
 
@@ -75,7 +66,6 @@ function render(filterText){
             ${platformCell(d, 'android', 'Android')}
           </div>
         </div>
-        ${renderPreview(d, examplesOpen)}
       `;
       block.appendChild(entry);
     });
@@ -139,9 +129,8 @@ function init(){
 
   const toggleBtn = document.getElementById('toggleExamples');
   toggleBtn.addEventListener('click', () => {
-    examplesOpen = !examplesOpen;
-    toggleBtn.textContent = examplesOpen ? 'Hide all examples' : 'Show all examples';
-    render(searchEl.value);
+    const hidden = document.body.classList.toggle('examples-hidden');
+    toggleBtn.textContent = hidden ? 'Show all examples' : 'Hide all examples';
   });
 
   const drawerToggle = document.getElementById('drawerToggle');
