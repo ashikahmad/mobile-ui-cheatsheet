@@ -24,6 +24,10 @@ const DATA = [
     ios:{term:"Push (Navigation Controller)", fw:"UINavigationController.pushViewController"},
     android:{term:"Navigate to a destination", fw:"NavController.navigate() · Fragment transaction"},
     desc:"Moving forward in a linear flow, adding the new screen on top with an animated transition and a way back."},
+  {cat:"Navigation & Structure", concept:"Presenting a screen modally", demo:"modalpresent",
+    ios:{term:"Modal Presentation", fw:"present(animated:) · .sheet() / .fullScreenCover()"},
+    android:{term:"Dialog Destination", fw:"NavGraphBuilder.dialog() · DialogFragment"},
+    desc:"A new screen floats over the current one as an interruption to be explicitly dismissed, rather than being pushed into the back stack for linear back-navigation."},
 
   // ---------------- Buttons & Actions ----------------
   {cat:"Buttons & Actions", concept:"Standard tappable button", demo:"button",

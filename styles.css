@@ -569,11 +569,56 @@ body.examples-hidden .m-frame{display:none;}
 .m-pin-right{ right:6px; top:50%; transform:translateY(-50%); }
 
 /* nav stack push */
-.m-navstack{ position:relative; width:100%; height:74px; }
+.m-navstack{ position:relative; width:100%; height:74px; overflow:hidden; }
 .m-navstack-back{ position:absolute; top:6px; left:0; width:82%; height:100%; background:#fff; border-radius:10px; box-shadow:0 0 0 1px #E4E1D8; opacity:.55; }
-.m-navstack-front{ position:absolute; top:0; left:14%; width:82%; height:100%; background:#fff; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:600; }
+.m-navstack-front{ position:absolute; top:0; left:14%; width:82%; height:100%; background:#fff; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:600; animation:m-push-slide 2s ease-in-out infinite; }
 .m-navstack-front.ios{ box-shadow:0 6px 16px rgba(0,0,0,.18); color:var(--ios); }
 .m-navstack-front.android{ box-shadow:0 8px 18px rgba(0,0,0,.24); color:var(--android); }
+@keyframes m-push-slide{
+  0%{ transform:translateX(22%); opacity:.5; }
+  28%{ transform:translateX(0); opacity:1; }
+  62%{ transform:translateX(0); opacity:1; }
+  90%,100%{ transform:translateX(22%); opacity:.5; }
+}
+
+.m-modalstack{ position:relative; width:100%; height:74px; overflow:hidden; border-radius:10px; }
+.m-modalstack-back{ position:absolute; inset:0; background:#fff; border-radius:10px; box-shadow:0 0 0 1px #E4E1D8; }
+.m-modalstack-scrim{ position:absolute; inset:0; background:rgba(0,0,0,.28); border-radius:10px; opacity:0; animation:m-modal-scrim 2s ease-in-out infinite; }
+.m-modalstack-sheet{
+  position:absolute; left:6%; right:6%; bottom:0; height:82%;
+  background:#fff; border-radius:12px 12px 0 0;
+  box-shadow:0 -6px 16px rgba(0,0,0,.18);
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:600; color:var(--ios);
+  animation:m-modal-rise 2s ease-in-out infinite;
+}
+.m-modalstack-dialog{
+  position:absolute; left:16%; right:16%; top:50%; height:60%;
+  transform:translateY(-50%);
+  background:#fff; border-radius:14px;
+  box-shadow:0 8px 20px rgba(0,0,0,.24);
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:600; color:var(--android);
+  animation:m-modal-scale 2s ease-in-out infinite;
+}
+@keyframes m-modal-scrim{
+  0%{ opacity:0; }
+  28%{ opacity:1; }
+  62%{ opacity:1; }
+  90%,100%{ opacity:0; }
+}
+@keyframes m-modal-rise{
+  0%{ transform:translateY(85%); opacity:.4; }
+  28%{ transform:translateY(0); opacity:1; }
+  62%{ transform:translateY(0); opacity:1; }
+  90%,100%{ transform:translateY(85%); opacity:.4; }
+}
+@keyframes m-modal-scale{
+  0%{ transform:translateY(-50%) scale(.75); opacity:.3; }
+  28%{ transform:translateY(-50%) scale(1); opacity:1; }
+  62%{ transform:translateY(-50%) scale(1); opacity:1; }
+  90%,100%{ transform:translateY(-50%) scale(.75); opacity:.3; }
+}
 
 /* haptics */
 .m-haptic-wrap{ text-align:center; }

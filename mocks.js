@@ -293,6 +293,20 @@ const MOCKS = {
     const cls = p==='ios' ? 'ios' : 'android';
     return `<div class="m-navstack"><div class="m-navstack-back"></div><div class="m-navstack-front ${cls}"><span>Screen B</span></div></div>`;
   },
+  modalpresent(p){
+    if(p==='ios'){
+      return `<div class="m-modalstack">
+        <div class="m-modalstack-back"></div>
+        <div class="m-modalstack-scrim"></div>
+        <div class="m-modalstack-sheet"><span>New Screen</span></div>
+      </div>`;
+    }
+    return `<div class="m-modalstack">
+      <div class="m-modalstack-back"></div>
+      <div class="m-modalstack-scrim"></div>
+      <div class="m-modalstack-dialog"><span>New Screen</span></div>
+    </div>`;
+  },
   haptic(p){
     if(p==='ios') return `<div class="m-haptic-wrap">
       <div class="m-haptic">
