@@ -1,6 +1,8 @@
-function deviceShell(innerHtml, position){
-  if(position === 'top'){
-    return `<div class="m-shell crop-top"><div class="m-shell-notch"></div><div class="m-shell-content">${innerHtml}</div></div>`;
+function deviceShell(innerHtml, position, platform){
+  if(position === 'top' || position === 'top-chrome'){
+    const marker = platform === 'android' ? `<div class="m-shell-punch"></div>` : `<div class="m-shell-notch"></div>`;
+    const chromeClass = position === 'top-chrome' ? ' chrome' : '';
+    return `<div class="m-shell crop-top${chromeClass}">${marker}<div class="m-shell-content">${innerHtml}</div></div>`;
   }
   if(position === 'bottom'){
     return `<div class="m-shell crop-bottom"><div class="m-shell-content">${innerHtml}</div><div class="m-shell-home-pill"></div></div>`;
@@ -11,12 +13,20 @@ function deviceShell(innerHtml, position){
   return `<div class="m-shell full"><div class="m-shell-content">${innerHtml}</div></div>`;
 }
 
+function iosActivityTicks(){
+  const ticks = Array.from({length:8}, (_, i) => {
+    const opacity = (1 - i*0.11).toFixed(2);
+    return `<div class="m-tick" style="transform:rotate(${i*45}deg);opacity:${opacity};"></div>`;
+  }).join('');
+  return `<div class="m-activity">${ticks}</div>`;
+}
+
 const MOCKS = {
   navbar(p){
     const inner = p==='ios'
       ? `<div class="m-navbar m-navbar-ios"><span class="m-back">‹ Back</span><span class="m-title">Title</span><span class="m-action">Edit</span></div>`
       : `<div class="m-navbar m-navbar-android"><span>←</span><span class="m-title">Title</span><span class="m-icons">⋮</span></div>`;
-    return deviceShell(inner, 'top');
+    return deviceShell(inner, 'top', p);
   },
   tabbar(p){
     const inner = p==='ios'
@@ -150,8 +160,8 @@ const MOCKS = {
     return `<div class="${cls}"><div class="m-card-line"></div><div class="m-card-line"></div><div class="m-card-line"></div></div>`;
   },
   refresh(p){
-    const cls = p==='ios' ? 'm-spinner-ios' : 'm-spinner-android';
-    return `<div class="m-refresh"><div class="m-spinner ${cls}" style="margin-bottom:8px;"></div>Pull to refresh</div>`;
+    if(p==='ios') return `<div class="m-refresh"><div style="margin-bottom:8px;">${iosActivityTicks()}</div>Pull to refresh</div>`;
+    return `<div class="m-refresh"><div class="m-spinner m-spinner-android" style="margin-bottom:8px;"></div>Pull to refresh</div>`;
   },
   sticky(p){
     return `<div class="m-sticky">
@@ -221,13 +231,7 @@ const MOCKS = {
     return `<div class="m-spinner ${cls}"></div>`;
   },
   activityindicator(p){
-    if(p==='ios'){
-      const ticks = Array.from({length:8}, (_, i) => {
-        const opacity = (1 - i*0.11).toFixed(2);
-        return `<div class="m-tick" style="transform:rotate(${i*45}deg);opacity:${opacity};"></div>`;
-      }).join('');
-      return `<div class="m-activity">${ticks}</div>`;
-    }
+    if(p==='ios') return iosActivityTicks();
     return `<div class="m-spinner m-spinner-android"></div>`;
   },
   progress(p){
@@ -259,17 +263,15 @@ const MOCKS = {
     const inner = p==='ios'
       ? `<div class="m-statusbar m-statusbar-ios"><span>9:41</span><span class="m-si">••• 🛜 🔋</span></div>`
       : `<div class="m-statusbar m-statusbar-android"><span>9:41</span><span class="m-si">🔔 🛜 🔋</span></div>`;
-    return deviceShell(inner, 'top');
+    return deviceShell(inner, 'top-chrome', p);
   },
   safearea(p){
     if(p==='ios') return `<div class="m-shell full"><div class="m-notch"></div><div class="m-safe-inset ios">Safe Area</div></div>`;
     return `<div class="m-shell full"><div class="m-punch"></div><div class="m-safe-inset android">Content area</div></div>`;
   },
   homeindicator(p){
-    const inner = p==='ios'
-      ? `<div class="m-bottomstrip"><div class="m-home-pill"></div><div class="m-bottomstrip-caption">Home Indicator</div></div>`
-      : `<div class="m-bottomstrip"><div class="m-home-pill" style="background:#5B5E64;"></div><div class="m-bottomstrip-caption">Gesture pill (or 3-button nav)</div></div>`;
-    return deviceShell(inner, 'bottom');
+    const caption = p==='ios' ? 'Home Indicator' : 'Gesture pill (or 3-button nav)';
+    return deviceShell(`<div class="m-bottomstrip-caption">${caption}</div>`, 'bottom');
   },
   stack(p){
     const cls = p==='ios' ? 'ios' : 'android';
