@@ -153,7 +153,8 @@ const MOCKS = {
   },
   grid(p){
     const cls = p==='ios' ? 'm-grid-ios' : 'm-grid-android';
-    return `<div class="m-grid ${cls}"><div></div><div></div><div></div><div></div><div></div><div></div></div>`;
+    const items = Array.from({length:6}, (_, i) => `<div>${i+1}</div>`).join('');
+    return `<div class="m-grid ${cls}">${items}</div>`;
   },
   card(p){
     const cls = p==='ios' ? 'm-card-ios' : 'm-card-android';
