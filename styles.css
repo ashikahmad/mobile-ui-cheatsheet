@@ -96,6 +96,7 @@ a{color:inherit;}
   align-self:flex-start;
   height:100vh;
   overflow-y:auto;
+  overscroll-behavior:contain;
   padding:24px 18px;
   border-right:1px solid var(--line);
   display:flex;
@@ -151,17 +152,45 @@ a{color:inherit;}
 }
 
 .sidebar-scrim{display:none;}
+.drawer-head{display:none;}
 
 @media (max-width:899px){
+  .drawer-head{
+    display:block;
+    padding-bottom:14px;
+    border-bottom:1px solid var(--line);
+  }
+  .drawer-head-title{
+    margin:0 0 4px;
+    font-size:18px;
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+  .drawer-head-title .ios-word{color:var(--ios-text);}
+  .drawer-head-title .android-word{color:var(--android-text);}
+  .drawer-head-title .seam{color:var(--ink-soft);font-weight:400;padding:0 4px;}
+  .drawer-head-sub{
+    margin:0;
+    font-family:"Roboto Mono",monospace;
+    font-size:10.5px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+
   .drawer-toggle{
     display:inline-flex;
     align-items:center;
     gap:8px;
+    position:sticky;
+    top:12px;
+    z-index:15;
     margin:16px 24px 0;
     padding:9px 14px;
     border-radius:999px;
     border:1px solid var(--line);
     background:var(--surface);
+    box-shadow:0 4px 12px rgba(0,0,0,.1);
     font-size:13px;
     font-family:inherit;
     color:var(--ink);
@@ -182,6 +211,7 @@ a{color:inherit;}
     z-index:20;
   }
   .sidebar.open{transform:translateX(0);}
+  body.drawer-open{overflow:hidden;overscroll-behavior:contain;}
   .sidebar-scrim{
     display:block;
     position:fixed; inset:0;
@@ -246,6 +276,8 @@ main{flex:1 1 auto; min-width:0; padding:32px 24px 100px;}
 .term{font-weight:600;}
 .term.ios{color:var(--ios-text);}
 .term.android{color:var(--android-text);}
+.fw a{ color:inherit; text-decoration:underline; text-underline-offset:2px; }
+.fw a:hover{ color:var(--ink); }
 .fw{
   display:block;
   font-family:"Roboto Mono",monospace;
@@ -634,7 +666,8 @@ body.examples-hidden .m-frame{display:none;}
 .m-haptic-labels{ font-size:9.5px; color:#8E8E93; letter-spacing:.02em; }
 
 /* spec doc / guideline */
-.m-specdoc{ background:#fff; border-radius:10px; padding:16px 12px; width:100%; box-shadow:0 2px 8px rgba(0,0,0,.1); text-align:center; }
+.m-specdoc{ display:block; background:#fff; border-radius:10px; padding:16px 12px; width:100%; box-shadow:0 2px 8px rgba(0,0,0,.1); text-align:center; color:inherit; text-decoration:none; transition:box-shadow .12s, transform .12s; }
+.m-specdoc:hover{ box-shadow:0 4px 14px rgba(0,0,0,.16); transform:translateY(-1px); }
 .m-specdoc-bar{ height:4px; border-radius:2px; width:38%; margin:0 auto 10px; }
 .m-specdoc-bar.ios{ background:var(--ios); }
 .m-specdoc-bar.android{ background:var(--android); }

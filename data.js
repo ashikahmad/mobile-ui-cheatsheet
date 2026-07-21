@@ -195,8 +195,8 @@ const DATA = [
 
   // ---------------- Design Language & Frameworks ----------------
   {cat:"Design Language & Frameworks", concept:"Official design guidelines", demo:"guideline",
-    ios:{term:"Human Interface Guidelines (HIG)", fw:"developer.apple.com/design"},
-    android:{term:"Material Design (Material 3)", fw:"m3.material.io"},
+    ios:{term:"Human Interface Guidelines (HIG)", fw:"developer.apple.com/design", url:"https://developer.apple.com/design/"},
+    android:{term:"Material Design (Material 3)", fw:"m3.material.io", url:"https://m3.material.io/"},
     desc:"The canonical rulebook each platform publishes — the vocabulary in this sheet is drawn from both."},
   {cat:"Design Language & Frameworks", concept:"Modern declarative UI framework", demo:"declarative",
     ios:{term:"SwiftUI", fw:"declarative, since 2019"},

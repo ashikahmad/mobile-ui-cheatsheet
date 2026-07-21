@@ -14,7 +14,10 @@ function platformCell(entry, key, mobileLabel){
   if(p.none){
     inner = `<span class="none">${p.term}</span><span class="fw">${p.fw}</span>`;
   } else {
-    inner = `<span class="term ${key}">${p.term}</span><span class="fw">${p.fw}</span>`;
+    const fw = p.url
+      ? `<a href="${p.url}" target="_blank" rel="noopener">${p.fw}</a>`
+      : p.fw;
+    inner = `<span class="term ${key}">${p.term}</span><span class="fw">${fw}</span>`;
   }
   const preview = entry.demo ? renderCellPreview(entry, key) : '';
   return `<div class="platform-cell"><span class="label-mobile">${mobileLabel}</span>${inner}${preview}</div>`;
@@ -113,11 +116,13 @@ function openDrawer(){
   document.getElementById('sidebar').classList.add('open');
   document.getElementById('sidebarScrim').classList.add('open');
   document.getElementById('drawerToggle').setAttribute('aria-expanded', 'true');
+  document.body.classList.add('drawer-open');
 }
 function closeDrawer(){
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('sidebarScrim').classList.remove('open');
   document.getElementById('drawerToggle').setAttribute('aria-expanded', 'false');
+  document.body.classList.remove('drawer-open');
   document.getElementById('drawerToggle').focus();
 }
 

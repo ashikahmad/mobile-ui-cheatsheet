@@ -325,16 +325,16 @@ const MOCKS = {
     </div>`;
   },
   guideline(p){
-    if(p==='ios') return `<div class="m-specdoc">
+    if(p==='ios') return `<a class="m-specdoc" href="https://developer.apple.com/design/" target="_blank" rel="noopener">
       <div class="m-specdoc-bar ios"></div>
       <div class="m-specdoc-title">Human Interface<br>Guidelines</div>
       <div class="m-specdoc-sub">developer.apple.com/design</div>
-    </div>`;
-    return `<div class="m-specdoc">
+    </a>`;
+    return `<a class="m-specdoc" href="https://m3.material.io/" target="_blank" rel="noopener">
       <div class="m-specdoc-bar android"></div>
       <div class="m-specdoc-title">Material Design 3</div>
       <div class="m-specdoc-sub">m3.material.io</div>
-    </div>`;
+    </a>`;
   },
   declarative(p){
     if(p==='ios') return codeCard([
