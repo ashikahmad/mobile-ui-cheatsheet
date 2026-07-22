@@ -160,6 +160,33 @@ const MOCKS = {
     const cls = p==='ios' ? 'm-card-ios' : 'm-card-android';
     return `<div class="${cls}"><div class="m-card-line"></div><div class="m-card-line"></div><div class="m-card-line"></div></div>`;
   },
+  imageview(p){
+    const cls = p==='ios' ? 'm-image-ios' : 'm-image-android';
+    return `<div class="m-image-frame ${cls}"><span>🖼️</span></div>`;
+  },
+  webview(p){
+    const cls = p==='ios' ? 'm-webview-ios' : 'm-webview-android';
+    return `<div class="m-webview ${cls}">
+      <div class="m-webview-bar">🔒 example.com</div>
+      <div class="m-webview-body"><div class="m-card-line"></div><div class="m-card-line"></div><div class="m-card-line"></div></div>
+    </div>`;
+  },
+  divider(p){
+    const cls = p==='ios' ? 'm-divider-ios' : 'm-divider-android';
+    return `<div class="m-divider-demo">
+      <div class="m-card-line"></div>
+      <div class="${cls}"></div>
+      <div class="m-card-line"></div>
+      <div class="${cls}"></div>
+      <div class="m-card-line"></div>
+    </div>`;
+  },
+  actionbutton(p){
+    const inner = p==='ios'
+      ? `<div class="m-navbar m-navbar-ios"><span class="m-back">‹ Back</span><span class="m-title">Title</span><span class="m-action m-action-highlight">⬇</span></div>`
+      : `<div class="m-navbar m-navbar-android"><span>←</span><span class="m-title">Title</span><span class="m-action-highlight">🔍</span></div>`;
+    return deviceShell(inner, 'top', p);
+  },
   refresh(p){
     if(p==='ios') return `<div class="m-refresh"><div style="margin-bottom:8px;">${iosActivityTicks()}</div>Pull to refresh</div>`;
     return `<div class="m-refresh"><div class="m-spinner m-spinner-android" style="margin-bottom:8px;"></div>Pull to refresh</div>`;

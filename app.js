@@ -2,9 +2,13 @@ function slugify(str){
   return str.toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
 }
 
+function fwText(p){
+  return Array.isArray(p.fw) ? p.fw.map(f => f.t).join(' · ') : p.fw;
+}
+
 function matchesQuery(entry, q){
   if(!q) return true;
-  const haystack = [entry.concept, entry.ios.term, entry.ios.fw, entry.android.term, entry.android.fw, entry.desc].join(' ').toLowerCase();
+  const haystack = [entry.concept, entry.ios.term, fwText(entry.ios), entry.android.term, fwText(entry.android), entry.desc].join(' ').toLowerCase();
   return haystack.includes(q);
 }
 
@@ -14,8 +18,8 @@ function platformCell(entry, key, mobileLabel){
   if(p.none){
     inner = `<span class="none">${p.term}</span><span class="fw">${p.fw}</span>`;
   } else {
-    const fw = p.url
-      ? `<a href="${p.url}" target="_blank" rel="noopener">${p.fw}</a>`
+    const fw = Array.isArray(p.fw)
+      ? p.fw.map(f => f.url ? `<a href="${f.url}" target="_blank" rel="noopener">${f.t}</a>` : f.t).join(' · ')
       : p.fw;
     inner = `<span class="term ${key}">${p.term}</span><span class="fw">${fw}</span>`;
   }
