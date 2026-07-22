@@ -10,10 +10,16 @@
 </head>
 <body>
 
-<header class="masthead">
-  <div class="masthead-inner">
+<div class="topbar">
+  <button id="drawerToggle" class="drawer-toggle" aria-expanded="false" aria-controls="sidebar" aria-label="Browse categories and search">☰</button>
+  <div class="topbar-id">
     <p class="eyebrow">Cross-platform mobile · vocabulary reference</p>
     <h1><span class="ios-word">iOS</span><span class="seam">↔</span><span class="android-word">Android</span> UI Component Cheatsheet</h1>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="masthead-inner">
     <p class="lede">The same idea, two names. This is a lookup table for the moment a designer says "just add a bottom sheet" and the iOS dev hears <em>Action Sheet</em> while the Android dev hears <em>BottomSheetDialog</em> — so everyone in the standup is talking about the same thing.</p>
     <div class="masthead-meta">
       <span><span class="dot ios"></span>iOS — UIKit / SwiftUI</span>
@@ -22,14 +28,8 @@
   </div>
 </header>
 
-<button id="drawerToggle" class="drawer-toggle" aria-expanded="false" aria-controls="sidebar">☰ Browse &amp; search</button>
-
 <div class="layout">
   <nav id="sidebar" class="sidebar" aria-label="Categories">
-    <div class="drawer-head">
-      <p class="drawer-head-title"><span class="ios-word">iOS</span><span class="seam">↔</span><span class="android-word">Android</span></p>
-      <p class="drawer-head-sub">UI Component Cheatsheet</p>
-    </div>
     <input id="search" type="text" placeholder="Search a concept, or a term like &quot;snackbar&quot;, &quot;UITableView&quot;, &quot;drawer&quot;…" autocomplete="off">
     <ul class="cat-list" id="catList"></ul>
     <button id="toggleExamples" class="util-toggle">Hide all examples</button>
