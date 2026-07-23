@@ -105,7 +105,7 @@ const MOCKS = {
     </div>`;
   },
   radio(p){
-    if(p==='ios') return `<div>
+    if(p==='ios') return `<div class="m-list m-list-ios">
       <div class="m-listrow"><span>Small</span><span></span></div>
       <div class="m-listrow"><span>Medium</span><span class="m-checkmark">✓</span></div>
       <div class="m-listrow"><span>Large</span><span></span></div>
