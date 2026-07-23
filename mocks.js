@@ -388,6 +388,18 @@ const MOCKS = {
       {t:'tv.text = "Hello"', i:0},
       {t:'layout.addView(tv)', i:0},
     ], 'android');
+  },
+  iconsystem(p){
+    if(p==='ios') return `<a class="m-specdoc" href="https://developer.apple.com/sf-symbols/" target="_blank" rel="noopener">
+      <div class="m-specdoc-bar ios"></div>
+      <div class="m-specdoc-title">SF Symbols</div>
+      <div class="m-specdoc-sub">developer.apple.com/sf-symbols</div>
+    </a>`;
+    return `<a class="m-specdoc" href="https://fonts.google.com/icons" target="_blank" rel="noopener">
+      <div class="m-specdoc-bar android"></div>
+      <div class="m-specdoc-title">Material Symbols</div>
+      <div class="m-specdoc-sub">fonts.google.com/icons</div>
+    </a>`;
   }
 };
 

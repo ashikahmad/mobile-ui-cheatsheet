@@ -224,6 +224,10 @@ const DATA = [
     ios:{term:"UIKit", fw:[{t:"imperative, view-controller based", url:"https://developer.apple.com/documentation/uikit"}]},
     android:{term:"Views / Android View System", fw:[{t:"imperative, XML layouts + Activities/Fragments", url:"https://developer.android.com/develop/ui/views/layout/declaring-layout"}]},
     desc:"The older, still widely-used toolkit most existing production codebases are built on."},
+  {cat:"Design Language & Frameworks", concept:"Icon library", demo:"iconsystem",
+    ios:{term:"SF Symbols", fw:[{t:"9,000+ symbols, ships with San Francisco font", url:"https://developer.apple.com/sf-symbols/"}]},
+    android:{term:"Material Symbols", fw:[{t:"Apache-2.0, variable font + SVG", url:"https://fonts.google.com/icons"}]},
+    desc:"Each platform's canonical icon set. Material Symbols is Apache-2.0 and free to embed anywhere, web included; SF Symbols is licensed only for use inside apps built for Apple's own platforms, not for websites or cross-platform software."},
 ];
 
 const CATEGORY_ORDER = [...new Set(DATA.map(d => d.cat))];
