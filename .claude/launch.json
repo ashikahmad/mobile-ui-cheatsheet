@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "static-server",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [".claude/no-cache-server.py", "4176"],
+      "port": 4176
+    }
+  ]
+}
