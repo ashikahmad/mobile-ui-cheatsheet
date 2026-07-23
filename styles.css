@@ -341,7 +341,7 @@ body.examples-hidden .m-frame{display:none;}
   display:inline-flex; align-items:center; gap:5px;
 }
 .m-frame-tag .dot{width:6px;height:6px;}
-.m-body{width:100%;display:flex;justify-content:center;}
+.m-body{width:100%;display:flex;margin-top:6px;justify-content:center;}
 
 .m-shell{
   position:relative;
