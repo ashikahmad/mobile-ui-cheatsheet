@@ -228,8 +228,8 @@ const MOCKS = {
     }
     const inner = `<div class="m-sheet">
         <div class="m-sheet-handle"></div>
-        <div class="m-listrow">🗑 Delete Conversation</div>
-        <div class="m-listrow">↪ Forward</div>
+        <div class="m-listrow">${icon('trash-2')} Delete Conversation</div>
+        <div class="m-listrow">${icon('forward')} Forward</div>
       </div>`;
     return deviceShell(inner, 'bottom-sheet');
   },
@@ -266,7 +266,7 @@ const MOCKS = {
     }
     const inner = `<div class="m-fullscreen">
         <div class="m-fs-toolbar-android">
-          <span class="m-fs-close">✕</span>
+          <span class="m-fs-close">${icon('x')}</span>
           <span class="m-fs-title">New Message</span>
           <span class="m-fs-save">SAVE</span>
         </div>
