@@ -4,8 +4,9 @@ function deviceShell(innerHtml, position, platform){
     const chromeClass = position === 'top-chrome' ? ' chrome' : '';
     return `<div class="m-shell crop-top${chromeClass}">${marker}<div class="m-shell-content">${innerHtml}</div></div>`;
   }
-  if(position === 'bottom'){
-    return `<div class="m-shell crop-bottom"><div class="m-shell-content">${innerHtml}</div><div class="m-shell-home-pill"></div></div>`;
+  if(position === 'bottom' || position === 'bottom-sheet'){
+    const sheetClass = position === 'bottom-sheet' ? ' sheet' : '';
+    return `<div class="m-shell crop-bottom${sheetClass}"><div class="m-shell-content">${innerHtml}</div><div class="m-shell-home-pill"></div></div>`;
   }
   if(position === 'floating-bottom'){
     return `<div class="m-shell crop-bottom floating"><div class="m-shell-content">${innerHtml}</div><div class="m-shell-home-pill"></div></div>`;
@@ -224,7 +225,7 @@ const MOCKS = {
         <div class="m-listrow">🗑 Delete Conversation</div>
         <div class="m-listrow">↪ Forward</div>
       </div>`;
-    return deviceShell(inner, 'bottom');
+    return deviceShell(inner, 'bottom-sheet');
   },
   sheet(p){
     const inner = `<div class="m-sheet">
@@ -233,7 +234,7 @@ const MOCKS = {
         <div class="m-card-line"></div>
         <div class="m-card-line"></div>
       </div>`;
-    return deviceShell(inner, 'bottom');
+    return deviceShell(inner, 'bottom-sheet');
   },
   popover(p){
     if(p==='ios') return `<div class="m-popover m-popover-ios">
