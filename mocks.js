@@ -142,9 +142,9 @@ const MOCKS = {
   },
   list(p){
     if(p==='ios') return `<div class="m-list m-list-ios">
-      <div class="m-listrow"><span>Inbox</span><span class="m-chev">›</span></div>
-      <div class="m-listrow"><span>Drafts</span><span class="m-chev">›</span></div>
-      <div class="m-listrow"><span>Sent</span><span class="m-chev">›</span></div>
+      <div class="m-listrow"><span>Inbox</span><span class="m-chev">${icon('chevron-right')}</span></div>
+      <div class="m-listrow"><span>Drafts</span><span class="m-chev">${icon('chevron-right')}</span></div>
+      <div class="m-listrow"><span>Sent</span><span class="m-chev">${icon('chevron-right')}</span></div>
     </div>`;
     return `<div class="m-list m-list-android">
       <div class="m-listrow"><span>Inbox</span></div>
