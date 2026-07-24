@@ -427,6 +427,7 @@ body.examples-hidden .m-frame{display:none;}
 .m-listrow{ display:flex; align-items:center; justify-content:space-between; padding:7px 2px; font-size:12.5px; border-bottom:1px solid #E4E1D8; }
 .m-listrow:last-child{ border-bottom:none; }
 .m-checkmark{ color:var(--ios); font-weight:700; }
+.m-icon{ width:1em; height:1em; display:inline-block; vertical-align:-0.15em; flex-shrink:0; }
 .m-radio{ width:18px;height:18px;border-radius:50%;border:2px solid #B9B6AC; position:relative; flex:0 0 auto; }
 .m-radio.selected{ border-color:var(--android); }
 .m-radio.selected::after{ content:""; position:absolute; inset:3px; border-radius:50%; background:var(--android); }
