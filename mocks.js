@@ -25,20 +25,20 @@ function iosActivityTicks(){
 const MOCKS = {
   navbar(p){
     const inner = p==='ios'
-      ? `<div class="m-navbar m-navbar-ios"><span class="m-back">‹ Back</span><span class="m-title">Title</span><span class="m-action">Edit</span></div>`
-      : `<div class="m-navbar m-navbar-android"><span>←</span><span class="m-title">Title</span><span class="m-icons">⋮</span></div>`;
+      ? `<div class="m-navbar m-navbar-ios"><span class="m-back">${icon('chevron-left')} Back</span><span class="m-title">Title</span><span class="m-action">Edit</span></div>`
+      : `<div class="m-navbar m-navbar-android"><span>${icon('arrow-left')}</span><span class="m-title">Title</span><span class="m-icons">${icon('more-vertical')}</span></div>`;
     return deviceShell(inner, 'top', p);
   },
   tabbar(p){
     const inner = p==='ios'
       ? `<div class="m-tabbar m-tabbar-ios">
-        <div class="m-tab"><span>◻</span>Home</div>
-        <div class="m-tab active"><span>◉</span>Search</div>
-        <div class="m-tab"><span>☰</span>Profile</div></div>`
+        <div class="m-tab"><span>${icon('home')}</span>Home</div>
+        <div class="m-tab active"><span>${icon('search')}</span>Search</div>
+        <div class="m-tab"><span>${icon('user')}</span>Profile</div></div>`
       : `<div class="m-tabbar m-tabbar-android">
-        <div class="m-tab"><span class="m-tabicon">◻</span>Home</div>
-        <div class="m-tab active"><span class="m-tabicon">◉</span>Search</div>
-        <div class="m-tab"><span class="m-tabicon">☰</span>Profile</div></div>`;
+        <div class="m-tab"><span class="m-tabicon">${icon('home')}</span>Home</div>
+        <div class="m-tab active"><span class="m-tabicon">${icon('search')}</span>Search</div>
+        <div class="m-tab"><span class="m-tabicon">${icon('user')}</span>Profile</div></div>`;
     return deviceShell(inner, 'bottom');
   },
   drawer(p){
@@ -50,8 +50,8 @@ const MOCKS = {
     return deviceShell(inner, 'cover');
   },
   backrow(p){
-    if(p==='ios') return `<div style="text-align:center;font-size:12px;"><span style="color:var(--ios);font-weight:600;">‹ Back</span><div style="color:#8E8E93;font-size:10px;margin-top:6px;">+ edge-swipe gesture</div></div>`;
-    return `<div style="text-align:center;font-size:12px;"><span style="color:var(--android);font-weight:600;">← Up</span><div style="color:#8E8E93;font-size:10px;margin-top:6px;">+ system back gesture</div></div>`;
+    if(p==='ios') return `<div style="text-align:center;font-size:12px;"><span style="color:var(--ios);font-weight:600;">${icon('chevron-left')} Back</span><div style="color:#8E8E93;font-size:10px;margin-top:6px;">+ edge-swipe gesture</div></div>`;
+    return `<div style="text-align:center;font-size:12px;"><span style="color:var(--android);font-weight:600;">${icon('arrow-left')} Up</span><div style="color:#8E8E93;font-size:10px;margin-top:6px;">+ system back gesture</div></div>`;
   },
   segmented(p){
     if(p==='ios') return `<div class="m-segmented"><span class="active">Day</span><span>Week</span><span>Month</span></div>`;
