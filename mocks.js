@@ -214,13 +214,17 @@ const MOCKS = {
     </div>`;
   },
   actionsheet(p){
-    const inner = p==='ios'
-      ? `<div class="m-sheet">
-        <div class="m-listrow danger">Delete Conversation</div>
-        <div class="m-listrow">Forward</div>
-        <div class="m-cancel">Cancel</div>
-      </div>`
-      : `<div class="m-sheet">
+    if(p==='ios'){
+      const inner = `<div class="m-actionsheet">
+        <div class="m-actionsheet-group">
+          <div class="m-actionsheet-row danger">Delete Conversation</div>
+          <div class="m-actionsheet-row">Forward</div>
+        </div>
+        <div class="m-actionsheet-row m-actionsheet-cancel">Cancel</div>
+      </div>`;
+      return deviceShell(inner, 'bottom');
+    }
+    const inner = `<div class="m-sheet">
         <div class="m-sheet-handle"></div>
         <div class="m-listrow">🗑 Delete Conversation</div>
         <div class="m-listrow">↪ Forward</div>
