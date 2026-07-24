@@ -14,12 +14,19 @@ function deviceShell(innerHtml, position, platform){
   return `<div class="m-shell full"><div class="m-shell-content">${innerHtml}</div></div>`;
 }
 
-function iosActivityTicks(){
+function iosActivityTicks(size){
+  const s = size || 26;
+  const scale = s / 26;
+  const tickW = (2*scale).toFixed(2);
+  const tickH = (7*scale).toFixed(2);
+  const originX = (1*scale).toFixed(2);
+  const originY = (13*scale).toFixed(2);
+  const marginLeft = (-1*scale).toFixed(2);
   const ticks = Array.from({length:8}, (_, i) => {
     const opacity = (1 - i*0.11).toFixed(2);
-    return `<div class="m-tick" style="transform:rotate(${i*45}deg);opacity:${opacity};"></div>`;
+    return `<div class="m-tick" style="width:${tickW}px;height:${tickH}px;margin-left:${marginLeft}px;transform-origin:${originX}px ${originY}px;transform:rotate(${i*45}deg);opacity:${opacity};"></div>`;
   }).join('');
-  return `<div class="m-activity">${ticks}</div>`;
+  return `<div class="m-activity" style="width:${s}px;height:${s}px;">${ticks}</div>`;
 }
 
 const MOCKS = {
@@ -189,8 +196,10 @@ const MOCKS = {
     return deviceShell(inner, 'top', p);
   },
   refresh(p){
-    if(p==='ios') return `<div class="m-refresh"><div style="margin-bottom:8px;">${iosActivityTicks()}</div>Pull to refresh</div>`;
-    return `<div class="m-refresh"><div class="m-spinner m-spinner-android" style="margin-bottom:8px;"></div>Pull to refresh</div>`;
+    const inner = p==='ios'
+      ? `<div class="m-refresh"><div class="m-refresh-activity">${iosActivityTicks(18)}</div>Pull to refresh</div>`
+      : `<div class="m-refresh"><div class="m-spinner m-spinner-android" style="margin-top:2px;margin-bottom:6px;"></div>Pull to refresh</div>`;
+    return deviceShell(inner, 'top', p);
   },
   sticky(p){
     const cls = p==='ios' ? 'm-sticky-ios' : 'm-sticky-android';
