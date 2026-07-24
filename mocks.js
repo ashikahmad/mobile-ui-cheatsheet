@@ -163,12 +163,12 @@ const MOCKS = {
   },
   imageview(p){
     const cls = p==='ios' ? 'm-image-ios' : 'm-image-android';
-    return `<div class="m-image-frame ${cls}"><span>🖼️</span></div>`;
+    return `<div class="m-image-frame ${cls}"><span>${icon('image')}</span></div>`;
   },
   webview(p){
     const cls = p==='ios' ? 'm-webview-ios' : 'm-webview-android';
     return `<div class="m-webview ${cls}">
-      <div class="m-webview-bar">🌐 example.com</div>
+      <div class="m-webview-bar">${icon('globe')} example.com</div>
       <div class="m-webview-body"><div class="m-card-line"></div><div class="m-card-line"></div><div class="m-card-line"></div></div>
     </div>`;
   },

@@ -486,8 +486,8 @@ body.examples-hidden .m-frame{display:none;}
 .m-image-android{ border-radius:4px; }
 
 .m-webview{ background:#fff; border-radius:10px; width:100%; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,.08); }
-.m-webview-bar{ font-size:9.5px; padding:6px 10px; font-family:"Roboto Mono",monospace; }
-.m-webview-ios .m-webview-bar{ background:rgba(249,249,251,.95); color:#6B6F76; box-shadow:0 1px 0 #D8D8DC; text-align:center; }
+.m-webview-bar{ display:flex; align-items:center; gap:4px; font-size:9.5px; padding:6px 10px; font-family:"Roboto Mono",monospace; }
+.m-webview-ios .m-webview-bar{ background:rgba(249,249,251,.95); color:#6B6F76; box-shadow:0 1px 0 #D8D8DC; justify-content:center; }
 .m-webview-android .m-webview-bar{ background:#fff; color:#5B5E64; box-shadow:0 1px 4px rgba(0,0,0,.12); }
 .m-webview-body{ padding:12px; }
 
