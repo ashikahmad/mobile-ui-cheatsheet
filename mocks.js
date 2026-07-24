@@ -92,7 +92,7 @@ const MOCKS = {
       <div class="m-wheel-row">Jul 16</div>
     </div>`;
     return `<div class="m-dropdown">
-      <div class="m-dropdown-head"><span>📅 Jul 16, 2026</span><span>▾</span></div>
+      <div class="m-dropdown-head"><span>${icon('calendar')} Jul 16, 2026</span><span>${icon('chevron-down')}</span></div>
     </div>`;
   },
   switch(p){
@@ -101,14 +101,14 @@ const MOCKS = {
   },
   checkbox(p){
     return `<div class="m-checkrow">
-      <div class="m-checkline"><span class="m-checkbox">✓</span> Remember me</div>
+      <div class="m-checkline"><span class="m-checkbox">${icon('check')}</span> Remember me</div>
       <div class="m-checkline"><span class="m-checkbox" style="background:#fff;box-shadow:inset 0 0 0 2px #C9C5B8;"></span> Send updates</div>
     </div>`;
   },
   radio(p){
     if(p==='ios') return `<div class="m-list m-list-ios">
       <div class="m-listrow"><span>Small</span><span></span></div>
-      <div class="m-listrow"><span>Medium</span><span class="m-checkmark">✓</span></div>
+      <div class="m-listrow"><span>Medium</span><span class="m-checkmark">${icon('check')}</span></div>
       <div class="m-listrow"><span>Large</span><span></span></div>
     </div>`;
     return `<div>
@@ -124,7 +124,7 @@ const MOCKS = {
       <div class="m-wheel-row">May</div>
     </div>`;
     return `<div class="m-dropdown">
-      <div class="m-dropdown-head"><span>April</span><span>▾</span></div>
+      <div class="m-dropdown-head"><span>April</span><span>${icon('chevron-down')}</span></div>
       <div class="m-dropdown-item">March</div>
       <div class="m-dropdown-item">May</div>
     </div>`;
@@ -137,8 +137,8 @@ const MOCKS = {
     return `<div class="m-stepper"><span>–</span><span>+</span></div>`;
   },
   searchbar(p){
-    if(p==='ios') return `<div class="m-search m-search-ios">🔍 Search</div>`;
-    return `<div class="m-search m-search-android">🔍 Search</div>`;
+    if(p==='ios') return `<div class="m-search m-search-ios">${icon('search')} Search</div>`;
+    return `<div class="m-search m-search-android">${icon('search')} Search</div>`;
   },
   list(p){
     if(p==='ios') return `<div class="m-list m-list-ios">
