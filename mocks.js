@@ -168,7 +168,7 @@ const MOCKS = {
   webview(p){
     const cls = p==='ios' ? 'm-webview-ios' : 'm-webview-android';
     return `<div class="m-webview ${cls}">
-      <div class="m-webview-bar">🔒 example.com</div>
+      <div class="m-webview-bar">🌐 example.com</div>
       <div class="m-webview-body"><div class="m-card-line"></div><div class="m-card-line"></div><div class="m-card-line"></div></div>
     </div>`;
   },
@@ -193,13 +193,15 @@ const MOCKS = {
     return `<div class="m-refresh"><div class="m-spinner m-spinner-android" style="margin-bottom:8px;"></div>Pull to refresh</div>`;
   },
   sticky(p){
-    return `<div class="m-sticky">
+    const cls = p==='ios' ? 'm-sticky-ios' : 'm-sticky-android';
+    const inner = `<div class="m-sticky ${cls}">
       <div class="m-sticky-head">A</div>
       <div class="m-listrow">Alicia</div>
       <div class="m-listrow">Amir</div>
       <div class="m-sticky-head">B</div>
       <div class="m-listrow">Beth</div>
     </div>`;
+    return deviceShell(inner, 'cover');
   },
   alert(p){
     if(p==='ios') return `<div class="m-dialog-ios">
