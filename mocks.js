@@ -247,9 +247,32 @@ const MOCKS = {
       <div class="m-listrow">Share</div><div class="m-listrow">Copy Link</div></div>`;
   },
   fullscreen(p){
+    if(p==='ios'){
+      const inner = `<div class="m-fullscreen">
+        <div class="m-navbar m-navbar-ios">
+          <span class="m-back">Cancel</span>
+          <span class="m-title">New Message</span>
+          <span class="m-action">Send</span>
+        </div>
+        <div class="m-fs-body">
+          <div class="m-card-line"></div>
+          <div class="m-card-line"></div>
+          <div class="m-card-line" style="width:70%;"></div>
+        </div>
+      </div>`;
+      return deviceShell(inner, 'cover');
+    }
     const inner = `<div class="m-fullscreen">
-        <div class="m-fs-head"><span>New Message</span><span class="m-fs-close">✕</span></div>
-        <div class="m-card-line"></div><div class="m-card-line"></div>
+        <div class="m-fs-toolbar-android">
+          <span class="m-fs-close">✕</span>
+          <span class="m-fs-title">New Message</span>
+          <span class="m-fs-save">SAVE</span>
+        </div>
+        <div class="m-fs-body">
+          <div class="m-card-line"></div>
+          <div class="m-card-line"></div>
+          <div class="m-card-line" style="width:70%;"></div>
+        </div>
       </div>`;
     return deviceShell(inner, 'cover');
   },
