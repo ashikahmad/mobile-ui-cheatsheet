@@ -298,7 +298,7 @@ const MOCKS = {
     return `<div class="m-progress" style="height:${h};"><div class="m-progress-fill" style="background:${color};"></div></div>`;
   },
   badge(p){
-    return `<div class="m-badge-wrap"><div class="m-badge-icon">🔔</div><div class="m-badge-dot">3</div></div>`;
+    return `<div class="m-badge-wrap"><div class="m-badge-icon">${icon('bell')}</div><div class="m-badge-dot">3</div></div>`;
   },
   depth(p){
     if(p==='ios') return `<div class="m-depth-row">
