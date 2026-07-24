@@ -618,7 +618,7 @@ body.examples-hidden .m-frame{display:none;}
 .m-statusbar{ display:flex; justify-content:space-between; align-items:center; width:100%; padding:6px 12px; font-size:11px; font-weight:700; border-radius:2px; }
 .m-statusbar-ios{ background:#fff; color:#000; box-shadow:0 0 0 1px #E4E1D8; }
 .m-statusbar-android{ background:#101214; color:#fff; }
-.m-statusbar .m-si{ font-size:10px; letter-spacing:1px; }
+.m-statusbar .m-si{ display:inline-flex; align-items:center; gap:4px; font-size:10px; }
 
 /* safe area / device frame */
 .m-notch{ position:absolute; top:-2px; left:50%; transform:translateX(-50%); width:38px; height:11px; background:#B9B6AC; border-radius:0 0 9px 9px; }

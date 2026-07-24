@@ -319,8 +319,8 @@ const MOCKS = {
   },
   statusbar(p){
     const inner = p==='ios'
-      ? `<div class="m-statusbar m-statusbar-ios"><span>9:41</span><span class="m-si">••• 🛜 🔋</span></div>`
-      : `<div class="m-statusbar m-statusbar-android"><span>9:41</span><span class="m-si">🔔 🛜 🔋</span></div>`;
+      ? `<div class="m-statusbar m-statusbar-ios"><span>9:41</span><span class="m-si">${icon('signal')}${icon('wifi')}${icon('battery')}</span></div>`
+      : `<div class="m-statusbar m-statusbar-android"><span>9:41</span><span class="m-si">${icon('bell')}${icon('wifi')}${icon('battery')}</span></div>`;
     return deviceShell(inner, 'top-chrome', p);
   },
   safearea(p){
@@ -339,10 +339,10 @@ const MOCKS = {
     const cls = p==='ios' ? 'ios' : 'android';
     const color = p==='ios' ? 'var(--ios)' : 'var(--android)';
     return `<div class="m-constraint-frame">
-      <span class="m-pin m-pin-top" style="color:${color};">↑</span>
-      <span class="m-pin m-pin-bottom" style="color:${color};">↓</span>
-      <span class="m-pin m-pin-left" style="color:${color};">←</span>
-      <span class="m-pin m-pin-right" style="color:${color};">→</span>
+      <span class="m-pin m-pin-top" style="color:${color};">${icon('arrow-up')}</span>
+      <span class="m-pin m-pin-bottom" style="color:${color};">${icon('arrow-down')}</span>
+      <span class="m-pin m-pin-left" style="color:${color};">${icon('arrow-left')}</span>
+      <span class="m-pin m-pin-right" style="color:${color};">${icon('arrow-right')}</span>
       <div class="m-constraint-box ${cls}"></div>
     </div>`;
   },
