@@ -80,7 +80,7 @@ function render(filterText){
     main.appendChild(block);
   });
 
-  document.getElementById('resultCount').textContent = totalShown ? `${totalShown} components` : '';
+  document.getElementById('resultCount').innerHTML = totalShown ? `Total components<span class="cat-count">${totalShown}</span>` : '';
   if(totalShown === 0){
     main.innerHTML = `<div class="no-results">No matches. Try a different term — or a broader one.</div>`;
   }
@@ -89,15 +89,17 @@ function render(filterText){
 
 function buildSidebarNav(){
   const list = document.getElementById('catList');
-  list.innerHTML = '';
+  const total = document.getElementById('resultCount');
+  list.querySelectorAll('li.cat-item').forEach(li => li.remove());
   CATEGORY_ORDER.forEach(cat => {
     const count = DATA.filter(d => d.cat === cat).length;
     const li = document.createElement('li');
+    li.className = 'cat-item';
     li.innerHTML = `<a href="#cat-${slugify(cat)}" data-cat="${cat}">${cat}<span class="cat-count">${count}</span></a>`;
     li.querySelector('a').addEventListener('click', () => {
       if(isMobile()) closeDrawer();
     });
-    list.appendChild(li);
+    list.insertBefore(li, total);
   });
 }
 
@@ -137,9 +139,31 @@ function init(){
   searchEl.addEventListener('input', () => render(searchEl.value));
 
   const toggleBtn = document.getElementById('toggleExamples');
+  const setToggleState = (hidden) => {
+    toggleBtn.innerHTML = icon(hidden ? 'eye' : 'eye-off');
+    const label = hidden ? 'Show all examples' : 'Hide all examples';
+    toggleBtn.setAttribute('aria-label', label);
+    toggleBtn.setAttribute('aria-pressed', String(hidden));
+  };
+  setToggleState(false);
   toggleBtn.addEventListener('click', () => {
     const hidden = document.body.classList.toggle('examples-hidden');
-    toggleBtn.textContent = hidden ? 'Show all examples' : 'Hide all examples';
+    setToggleState(hidden);
+  });
+
+  const themeBtn = document.getElementById('themeToggle');
+  const setTheme = (theme) => {
+    document.documentElement.setAttribute('data-theme', theme);
+    themeBtn.innerHTML = icon(theme === 'dark' ? 'sun' : 'moon');
+    const label = theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+    themeBtn.setAttribute('aria-label', label);
+    themeBtn.setAttribute('aria-pressed', String(theme === 'dark'));
+  };
+  setTheme(localStorage.getItem('theme') || 'light');
+  themeBtn.addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    localStorage.setItem('theme', next);
   });
 
   const drawerToggle = document.getElementById('drawerToggle');

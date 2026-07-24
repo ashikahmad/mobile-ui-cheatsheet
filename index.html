@@ -10,33 +10,47 @@
 </head>
 <body>
 
-<div class="topbar">
-  <button id="drawerToggle" class="drawer-toggle" aria-expanded="false" aria-controls="sidebar" aria-label="Browse categories and search"><svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg></button>
-  <div class="topbar-id">
-    <p class="eyebrow">Cross-platform mobile · vocabulary reference</p>
-    <h1><span class="ios-word">iOS</span><span class="seam">↔</span><span class="android-word">Android</span> UI Component Cheatsheet</h1>
-  </div>
-</div>
-
-<header class="masthead">
-  <div class="masthead-inner">
-    <p class="lede">The same idea, two names. This is a lookup table for the moment a designer says "just add a bottom sheet" and the iOS dev hears <em>Action Sheet</em> while the Android dev hears <em>BottomSheetDialog</em> — so everyone in the standup is talking about the same thing.</p>
-    <div class="masthead-meta">
-      <span><span class="dot ios"></span>iOS — UIKit / SwiftUI</span>
-      <span><span class="dot android"></span>Android — Views / Jetpack Compose</span>
-    </div>
-  </div>
-</header>
-
-<div class="layout">
+<div class="page">
   <nav id="sidebar" class="sidebar" aria-label="Categories">
-    <input id="search" type="text" placeholder="Search a concept, or a term like &quot;snackbar&quot;, &quot;UITableView&quot;, &quot;drawer&quot;…" autocomplete="off">
-    <ul class="cat-list" id="catList"></ul>
-    <button id="toggleExamples" class="util-toggle">Hide all examples</button>
-    <span class="result-count" id="resultCount"></span>
+    <div class="sidebar-scroll">
+      <input id="search" type="text" placeholder="Search a concept or term…" autocomplete="off">
+      <ul class="cat-list" id="catList">
+        <li id="resultCount" class="cat-total"></li>
+      </ul>
+    </div>
+    <div class="sidebar-footer">
+      <button id="toggleExamples" class="icon-btn" type="button"></button>
+      <div class="footer-meta">
+        <span class="footer-version">v0.1</span>
+        <span class="footer-sep">·</span>
+        <a class="footer-github" href="https://github.com/ashikahmad/mobile-ui-cheatsheet" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <button id="themeToggle" class="icon-btn" type="button"></button>
+    </div>
   </nav>
   <div class="sidebar-scrim" id="sidebarScrim"></div>
-  <main id="main"></main>
+
+  <div class="content">
+    <div class="topbar">
+      <button id="drawerToggle" class="drawer-toggle" aria-expanded="false" aria-controls="sidebar" aria-label="Browse categories and search"><svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg></button>
+      <div class="topbar-id">
+        <p class="eyebrow">Cross-platform mobile · vocabulary reference</p>
+        <h1><span class="ios-word">iOS</span><span class="seam">↔</span><span class="android-word">Android</span> UI Cheatsheet</h1>
+      </div>
+    </div>
+
+    <header class="masthead">
+      <div class="masthead-inner">
+        <p class="lede">The same idea, two names. This is a lookup table for the moment a designer says "just add a bottom sheet" and the iOS dev hears <em>Action Sheet</em> while the Android dev hears <em>BottomSheetDialog</em> — so everyone in the standup is talking about the same thing.</p>
+        <div class="masthead-meta">
+          <span><span class="dot ios"></span>iOS — UIKit / SwiftUI</span>
+          <span><span class="dot android"></span>Android — Views / Jetpack Compose</span>
+        </div>
+      </div>
+    </header>
+
+    <main id="main"></main>
+  </div>
 </div>
 
 <footer>
