@@ -65,13 +65,13 @@ const MOCKS = {
     return `<div class="m-fab">+</div>`;
   },
   overflow(p){
-    if(p==='ios') return `<div><div class="m-menu-anchor">•••</div><div class="m-menu">
+    if(p==='ios') return `<div><div class="m-menu-anchor">${icon('more-horizontal')}</div><div class="m-menu">
       <div class="m-dropdown-item">Rename</div><div class="m-dropdown-item">Duplicate</div><div class="m-dropdown-item">Delete</div></div></div>`;
-    return `<div><div class="m-menu-anchor">⋮</div><div class="m-menu">
+    return `<div><div class="m-menu-anchor">${icon('more-vertical')}</div><div class="m-menu">
       <div class="m-dropdown-item">Rename</div><div class="m-dropdown-item">Duplicate</div><div class="m-dropdown-item">Delete</div></div></div>`;
   },
   contextmenu(p){
-    return `<div><div class="m-menu-anchor" style="text-align:center;font-size:10.5px;color:#8E8E93;">☝︎ long-press item</div><div class="m-menu">
+    return `<div><div class="m-menu-anchor" style="text-align:center;font-size:10.5px;color:#8E8E93;">${icon('pointer')} long-press item</div><div class="m-menu">
       <div class="m-dropdown-item">Rename</div><div class="m-dropdown-item">Duplicate</div><div class="m-dropdown-item">Delete</div></div></div>`;
   },
   swipe(p){
@@ -184,8 +184,8 @@ const MOCKS = {
   },
   actionbutton(p){
     const inner = p==='ios'
-      ? `<div class="m-navbar m-navbar-ios"><span class="m-back">‹ Back</span><span class="m-title">Title</span><span class="m-action m-action-highlight">⬇</span></div>`
-      : `<div class="m-navbar m-navbar-android"><span>←</span><span class="m-title">Title</span><span class="m-action-highlight">🔍</span></div>`;
+      ? `<div class="m-navbar m-navbar-ios"><span class="m-back">${icon('chevron-left')} Back</span><span class="m-title">Title</span><span class="m-action m-action-highlight">${icon('download')}</span></div>`
+      : `<div class="m-navbar m-navbar-android"><span>${icon('arrow-left')}</span><span class="m-title">Title</span><span class="m-action-highlight">${icon('search')}</span></div>`;
     return deviceShell(inner, 'top', p);
   },
   refresh(p){
