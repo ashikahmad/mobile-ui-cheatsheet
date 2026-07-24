@@ -1,4 +1,7 @@
+// Icon path data copied verbatim from lucide-static@1.26.0 (ISC license).
 const ICONS = {
+  // Mirrored inline in index.html's drawer-toggle button (static markup
+  // parsed before this script loads) — keep both copies in sync.
   'menu': '<path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" />',
   'chevron-left': '<path d="m15 18-6-6 6-6" />',
   'chevron-right': '<path d="m9 18 6-6-6-6" />',
